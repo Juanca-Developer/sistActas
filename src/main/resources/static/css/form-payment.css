@@ -1,0 +1,274 @@
+
+
+body {
+	background-color:#edf8ff;
+	font-family:Arial;
+	font-size:11px;
+}
+
+
+.tablemain tr:hover td{
+   background: rgba(0,0,0,0.05);
+}
+
+.tablemain tr td{
+  padding: 6px 0px;
+}
+
+
+#btnstartpage{
+
+    width: 35px;
+    color: #fff;
+    /* padding: 10px 20px; */
+    position: fixed;
+    right: 20px;
+    /* height: 40px; */
+    border-radius: 50%;
+    background: #30b530;
+    bottom: 21px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transform: rotate(-90deg);
+    transition: all 0.5s;
+    text-align: center;
+    height: 38px;
+
+}
+
+#btnstartpage:hover{
+
+    font-size: 33px;
+    transform: rotate(270deg);
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);    
+    transition: all 0.5s;
+}
+
+
+
+#alerta{
+  
+  cursor: pointer;
+    z-index: 10;
+    width: 250px;
+    padding-top: 20px !important;
+    border-radius: 10px;
+    padding: 10px 5px;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background: rgba(0, 0, 0, 0.63);
+    padding-right: 20px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+
+#alerta:hover{
+  opacity: 0.8;
+  transition: all 0.3s;
+}
+
+#alerta .btncerrar{
+	background: rgba(0,0,0,0.4);
+    top: 1px;
+    font-size: 20px;
+    position: absolute;
+    right: 3px;
+    border-radius: 50%;
+    padding: 2px 7px;
+    cursor: pointer;
+}
+
+#mensajealerta{
+  font-size: 16px;
+
+}
+
+
+
+#idmonto {
+	border-radius: 6px;
+	height: 45px;
+	width: 250px;
+	font-size: 25px;
+	outline:none;
+
+	
+}
+#idmonto:hover {
+	border: 2px solid rgba(6,123,0,0.59);
+	
+}
+
+#idtasa {
+	border-radius: 10px;
+	height: 40px;
+	width: 200px;
+	font-size: 25px;
+	outline:none;
+}
+#idtasa:hover {
+	border: 2px solid rgba(6,123,0,0.59);
+	
+}
+#idplazo {
+	border-radius: 8px;
+	height: 40px;
+	width: 200px;
+	font-size: 25px;
+	outline:none;
+}
+#idplazo:hover {
+	border: 2px solid rgba(6,123,0,0.59);
+	
+}
+#titulo
+{
+	font-family:Arial, Verdana;
+	font-size:34px;
+	color:#333333;
+	font-weight:bold;
+	height:40px;
+	padding-bottom:15px;
+	border-bottom:1px solid #ccc;
+	width:600px;
+}
+
+.subtitulo
+{
+	font-family:Arial, Verdana;
+	font-size:13px;
+	color: #666666;
+	margin-left: 20px;
+}
+
+.celeste
+{
+	font-family:Arial, Verdana;
+	background-color:#E2F3FB;
+	font-weight:bold;
+	color:#76777A;
+}
+
+.inputBox
+{
+	font-family:Arial, Verdana;
+	font-size:25px;
+	border:1px solid #ccc;
+	width:220px;
+	padding:3px;
+	height:35px;
+	text-align:right;
+}
+
+.tableGral
+{
+	font-family:Arial, Verdana;
+	border:1px solid #ccc;
+	width:100%;
+	font-size:20px;
+}
+
+.tableGral td
+{
+	padding:10px 5px 10px 30px;
+	width:50%;
+}
+
+
+.btnRest
+{
+
+    min-width: 100px;
+    font-size: 19px;
+    width: 101px;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #ff9f22;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.1);
+
+}
+
+.btnCalcu
+{
+
+    min-width: 100px;
+    font-size: 19px;
+    /* width: 80px; */
+    height: 30px;
+    border-radius: 6px;
+    background-color: #009e00;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.encabezadoSimulador
+{
+	font-family:Arial, Verdana;
+	font-size:27px;
+	background-color:#d9f9d9;
+	padding:3px;
+	font-weight:bold;
+}
+.encabezadoSimulador td
+{
+	border-right:1px solid #ccc;
+}
+
+.borTab
+{
+    color: #272727;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-size: 15px;
+    height: 23px;
+    width: 15%;
+}
+.inputBox2
+{
+	font-family:Arial, Verdana;
+	border:1px solid #ccc;
+	width:380px;
+	height:30px;
+	font-size:25px;
+	color:#000;
+	text-align:right;
+}
+.table2
+{
+    margin-left: 20px;
+    font-family: Arial, Verdana;
+    font-size: 25px;
+    color: #2e05fa;
+    border: 1px solid #ccc;
+    width: 650px;
+    font-weight: bold;
+    border-left: 3px solid #008000;
+}
+.callToAction{
+	background:url("/colombia/common/imgs/general/linkMoreInfo.gif") no-repeat scroll 0 5px transparent;
+	color:#339900;
+	font-size:13px;
+	font-weight:bold;
+	padding-left:10px;
+}
+
+.callToAction a{
+	color:#339900;
+}
+
+#contenedor {
+    position: relative;
+    margin: auto;
+    top: 30px;
+    width: 800px;
+    background-color: #fff;
+border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+	

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"class="no-js" lang="es-LA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/form-payment.css" />
+    <title>Confeccion Planes de Pago</title>
+  </head>
+  <body>
+
+
+
+
+		
+
+
+
+
+
+<script language="JavaScript">
+
+
+var showpanel;
+var closepanel;
+
+
+window.addEventListener('load',inicio);
+
+	function inicio(){
+
+		document.getElementById('btnstartpage').addEventListener('click',subir);
+
+		document.getElementById('alerta').addEventListener('click',function(){
+			closepanel();
+		});	
+
+
+	function subir(){
+  		window.scrollTo(0,0);
+	}
+
+	function hidealert(){
+
+
+	var tiempo = setTimeout(closepanel,9000);
+
+	};
+	
+
+	showpanel = function(param){
+		document.getElementById('alerta').style.display = "block";
+		document.getElementById('mensajealerta').innerHTML = param;
+		hidealert();
+	};
+
+
+	closepanel = function(){
+
+		document.getElementById('alerta').style.display = "none";
+	};
+
+
+	closepanel();
+
+
+
+
+
+	}; // fun de funcion main
+
+
+
+function formatMiles(nro)
+{
+	//alert('esto le llega a la funcion: ' + nro);
+	nro=String(nro);
+	var num = nro.replace(/\./g,'');
+	if(!isNaN(num))
+	{
+		//alert('la variable num, es numero: ' + num);
+		num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+		num = num.split('').reverse().join('').replace(/^[\.]/,'');
+		//alert('la variable num, dentro de function: ' + num);
+		return num;
+	}
+	else { return false; }
+}
+
+
+
+
+
+
+
+
+function Calcular()
+	{
+		var arrMatriz = new Array(document.getElementById('idPlazo').value);
+		var strCadena, monto, tasa, plazo, interes, cuota, abonoCapital, saldo, i, seguro, cuotaYseg;
+
+		if ( document.getElementById('idMonto').value=='')
+		{
+			showpanel('Por favor, ingrese el monto del acta.');
+			document.getElementById('idMonto').focus();
+			return false;
+		}
+		else
+		{
+
+			if (document.getElementById('idMonto').value >= 1000000000000)
+			{
+				showpanel('El monto no debe ser mayor de 999999999999.99');
+				document.getElementById('idMonto').focus();
+				return false;
+			}
+			else
+			{
+
+				if (document.getElementById('idPlazo').value=='')
+				{
+					showpanel('Por favor, ingrese el plazo en meses.');
+					document.getElementById('idPlazo').focus();
+					return false;
+				}
+				else
+				{
+
+					if (document.getElementById('idPlazo').value > 180)
+					{
+						showpanel('El plazo en meses no debe ser mayor que 180.');
+						document.getElementById('idPlazo').focus();
+						return false;
+					}
+					else
+					{
+
+						if (document.getElementById('idTasa').value=='' )
+						{
+							showpanel('Por favor, ingrese la tasa de inter\u00E9s.');
+							document.getElementById('idTasa').focus();
+							return false;
+						}
+						else
+						{
+							if (document.getElementById('idTasa').value.indexOf(".") == -1) { document.getElementById('idTasa').value = document.getElementById('idTasa').value + ".00" ;}
+
+							// document.getElementById('idTasa').value < 0 || document.getElementById('idTasa').value > 1
+
+							if ( !document.getElementById('idTasa').value.match("^[0-9]{0,1}(\.[0-9]{1,2})?$") )
+							{
+								showpanel('Por favor, para la tasa de inter\u00E9s ingrese un valor entre 0 y 9.99 El valor puede tener hasta 2 decimales. Ej. 5.35');
+								document.getElementById('idTasa').focus();
+								return false;
+							}
+							else
+							{
+								strCadena="<TABLE cellpadding='0' cellspacing='0' border='0' width='100%' class='tablemain' style='text-align:center;border:1px solid #CCC;'><TR class='encabezadoSimulador'> <TD>Per&iacute;odo</TD> <TD>Saldo Inicial</TD> <TD>Intereses</TD> <TD>Abono a Capital</TD> <TD>Cuota</TD> <TD>Saldo Final</TD></TR>";
+
+
+								for(i=0;i<document.getElementById('idPlazo').value;i++)
+								{
+									arrMatriz[i]=new Array(6);
+								}
+								monto=document.getElementById('idMonto').value;
+								tasa=document.getElementById('idTasa').value/100;
+								plazo=document.getElementById('idPlazo').value;
+								seguro=saldo;
+
+
+								interes=tasa*monto;
+								cuota=monto*(tasa*Math.pow((tasa+1),plazo))/(Math.pow((tasa+1),plazo)-1);
+								abonoCapital=cuota-interes;
+								saldo=monto-abonoCapital;
+								cuotaYseg=cuota;
+								seguro=(saldo);
+
+								for(i=0;i<document.getElementById('idPlazo').value;i++)
+								{
+									arrMatriz[i][0] = i+1;
+									arrMatriz[i][1] = Math.round(monto); //(Math.floor(monto*100))/100;
+									arrMatriz[i][2] = Math.round(interes); //(Math.floor(interes*100))/100;
+									arrMatriz[i][3] = Math.round(abonoCapital); //(Math.floor(abonoCapital*100))/100;
+									
+									arrMatriz[i][4] = Math.round(cuotaYseg); //(Math.floor(cuotaYseg*100))/100;
+                                    					arrMatriz[i][5] = Math.round(seguro);  //(Math.floor(seguro*100))/100;
+									monto=saldo;
+									interes=tasa*monto;
+									abonoCapital=cuota-interes;
+									saldo=monto-abonoCapital;
+									seguro=(saldo); //antes estaba: SALDO
+									cuotaYseg=cuota;
+
+								}
+
+								// ARREGLO PARA SEPARADOR DE MILES :
+
+								for(i=0;i<document.getElementById('idPlazo').value;i++)
+								{
+									arrMatriz[i][1]=formatMiles(arrMatriz[i][1]);
+									arrMatriz[i][2]=formatMiles(arrMatriz[i][2]);
+									arrMatriz[i][3]=formatMiles(arrMatriz[i][3]);
+									arrMatriz[i][4]=formatMiles(arrMatriz[i][4]);
+									arrMatriz[i][5]=formatMiles(arrMatriz[i][5]);
+								}
+
+
+								//alert('SIN puntos: ' + arrMatriz[4][1]);
+								//alert('CON puntos: ' + formatMiles(arrMatriz[4][1]));
+
+								for(i=0;i<document.getElementById('idPlazo').value;i++)
+								{
+									strCadena=strCadena+"<TR><TD class='borTab'>"+arrMatriz[i][0]+"</TD><TD class='borTab'>"+'$ '+arrMatriz[i][1]+"</TD><TD class='borTab'>"+'$ '+arrMatriz[i][2]+"</TD><TD class='borTab'>"+'$ '+arrMatriz[i][3]+"</TD><TD class='borTab'>"+'$ '+arrMatriz[i][4]+"</TD><TD class='borTab'>"+'$ '+arrMatriz[i][5]+"</TD></TR>";
+								}
+
+								strCadena=strCadena+"</TABLE>";
+								document.getElementById('idResultado').innerHTML=strCadena;
+								//alert(strCadena);
+							}
+
+						}
+
+					}
+				}
+
+		     	}
+
+		}
+	}
+
+
+	function redondeo2decimales(numero)
+	{
+		var original=parseFloat(numero);
+		var result=Math.round(original*100)/100 ;
+		return result;
+	}
+
+	function acceptNum(evt)
+	{
+
+		var nav4 = window.Event ? true : false;
+		// NOTE: Backspace = 8, Enter = 13, '0' = 48, '9' = 57
+		var key = nav4 ? evt.which : evt.keyCode;
+		return ( (key >= 48 && key <= 57) || key == 46 || key == 8 || key == 127);
+	}
+
+
+
+
+</script>
+
+
+
+
+<title>NEOS</title>
+
+
+</head>
+
+<body>
+
+
+<div draggable="true" id="btnstartpage">&#187</div>
+
+<div draggable="true" id="alerta"> 
+  <div>
+	<div class="btncerrar">x</div>
+	<div id="mensajealerta">This is a message</div>
+  </div>
+
+</div>
+
+
+
+<img src="/img/logo-osmedica.jpeg" width="300" height="100">
+<div id="contenedor">
+<table cellpadding="5" cellspacing="3" border="0" width="673">
+	<tbody><tr>
+		<td><p><span id="titulo">Plan de Pagos</span></p></td>
+	</tr>
+</tbody></table>
+
+
+
+
+<!-- ======================================================================================================== -->
+
+<form id="forma1">
+
+<table cellpadding="5" cellspacing="3" class="table2" border="0">
+	<tbody>
+		<tr>
+		<td>CUIT</td>
+		<td style="text-align:right;"><input  class="inputBox2"></td>
+	</tr>
+	<tr>
+		<td>Razon Social</td>
+		<td style="text-align:right;"><input  class="inputBox2"></td>
+	</tr>
+	<tr>
+		<td>Importe Acta</td>
+		<td style="text-align:right;"><input id="idMonto" onpaste="return false" class="inputBox2" onmouseover="this.style.textAlign='center';" onkeypress="return acceptNum(event);"></td>
+	</tr>
+	<tr>
+		<td>Cantidad de Cuotas</td>
+
+		<td style="text-align:right;"><input id="idPlazo" onpaste="return false" onkeypress="return acceptNum(event);" class="inputBox2" onmouseover="this.style.textAlign='center';"></td>
+	</tr>
+	<tr>
+		<td>Tasa de interés </td>
+		<td style="text-align:right;"><input id="idTasa" onpaste="return false" class="inputBox2" onmouseover="this.style.textAlign='center';" onkeypress="return acceptNum(event);"></td>
+	</tr>
+</tbody></table>
+<br>
+<table cellpadding="0" cellspacing="0" border="0" width="470px">
+	<tbody><tr>
+
+		<td width="235px">&nbsp;</td>
+		<td align="left">
+			<input id="idCalcular" type="button" onclick="Calcular();" value="Calcular" class="btnCalcu">
+		</td>
+		<td align="right" style="padding-right:10px;">
+			<input type="reset" value="Resetear" name="R2" class="btnRest" onclick="document.getElementById('idResultado').innerHTML='';">
+		</td>
+	</tr>
+</tbody></table>
+
+<!-- ======================================================================================================== -->
+<br><br>
+<div id="idResultado"></div>
+
+</form>
+<table cellpadding="5" cellspacing="3" border="0" width="709">
+	<tbody><tr>
+		<!--<td style="text-align:right;"><a href="Javascript:self.close();"><input id="btncerrar" type="button" value="cerrar"></td> -->
+	</tr>
+</tbody></table>
+
+<br><br>
+<script type="text/javascript" src="/resources/js/libs/citi_s_codeB.js"></script>
+<script type="text/javascript">
+		s.pageName ='Simulador plan de pagos prestamos ';
+		s.eVar4 = "Simulador plan de pagos prestamos";
+		s.events="event17";
+		var s_code=s.t();if(s_code)document.write(s_code);
+</script>
+
+</div>
+
+
+</body>
+<div class="col-lg-6 col-md-12 mx-auto">
+	<a th:href="@{/}" class="btn btn-primary my-2">Inicio</a>
+	
+</div>
+</html>

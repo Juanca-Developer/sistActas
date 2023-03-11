@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/form-product.css">
+
+  <title>CMSR-OSMEDICA</title>
+
+  
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+ 
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">CMSR-OSMEDICA</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Registro</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Log In</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+  
+  <div class="login">
+    <p th:if="${exito}!=null" th:text="${exito}" class="card text-white bg-success mb-6"></p>
+    <h1>Registro Actas </h1>
+            <form th:action="@{/inspection/register}"enctype="multipart/form-data" method="POST" >
+                 
+              <p th:if="${error != null}" th:text="${error}" style="color: red; font-size: 20px;" ></p>
+             
+              <label>Fecha</label>
+              <input type="date" class="form-control" name="dateInspection" pattern="dd-MM-yyyy"/>
+              
+              <label>Nro. Acta</label>
+              <input type="number" class="form-control" name="nroActa"/>
+                           
+              <label>Razon Social</label>
+              <select class="form-control" name="idCompany">
+                <option th:each ="company: ${companys}" th:value="${company.idCompany}" th:text= "${company.companyName}">
+
+                </option>
+              </select>
+                        
+              <label>Inspector</label>
+              <select class="form-control" name="idInspector"> 
+                   <option 
+                   th:each="inspector: ${inspectors}" th:value="${inspector.idInspector}" th:text="${inspector.name+ ' ' + inspector.lastName}">
+                   </option>
+              </select> 
+
+              <label>Periodo Inicio</label>
+              <input type="date" class="form-control" name="periodStarter"value="01-2000" pattern="MM-yyyy" />
+
+              <label>Periodo Final</label>
+              <input type="date" class="form-control" name="periodFinal" pattern="MM-yyyy"/>
+
+              <label>Importe</label>
+              <input type="number" class="form-control" name="${ ' $ ' + {#numbers.formatDecimal(inspection.amount, 0,'POINT' , 2, 'COMMA')}}"/>
+              
+              <br/><button type="submit" class="btn btn-primary">Guardar</button>
+              <a th:href="@{/}" class="btn btn-secondary my-2  ">Volver</a>
+              <a th:href="@{/inspection/list}" class="btn btn-outline-danger my-2  ">Listado Actas de Inspeccion</a>
+		
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+ 
+  
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
+</html>
